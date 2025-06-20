@@ -8,7 +8,7 @@ void InitSpawner(ObstacleSpawner *spawner, ObstacleType type, float interval, fl
     spawner->minDistance = minDist;
 }
 
-void TrySpawnObstacle(ObstacleSpawner *spawner, Obstacle *obstacles, int *obstacleCount, float delta)
+void TrySpawnObstacle(ObstacleSpawner *spawner, Obstacle *obstacles, int *obstacleCount, float delta, int playerPositionX)
 {
     spawner->timeSinceLastSpawn += delta;
 
@@ -38,7 +38,7 @@ void TrySpawnObstacle(ObstacleSpawner *spawner, Obstacle *obstacles, int *obstac
             }
             else if (obs.type == OBSTACLE_TYPE_FALLING)
             {
-                obs.position = (Vector2){GetRandomValue(0, 800), -50};
+                obs.position = (Vector2){GetRandomValue(playerPositionX - 150, playerPositionX + 150), -50};
                 obs.velocity = (Vector2){0, 250};
             }
 

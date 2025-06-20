@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -I./include -L./lib -lraylib -lopengl32 -lgdi32 -lwinmm -Os -s
-SRC = src/player.c src/obstacle.c src/game.c main.c
+SRC = src/player.c src/obstacle.c src/game.c main.c src/collectible.c
 OBJ = $(SRC:.c=.o)
 OUT = bin/monjeu.exe
 

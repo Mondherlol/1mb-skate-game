@@ -12,10 +12,6 @@
 #define MAX_FRAMES 4
 #define JUMP_BUFFER_FRAMES 6
 
-// Dimensions de la hitbox réelle
-#define PLAYER_HITBOX_WIDTH 50
-#define PLAYER_HITBOX_HEIGHT 80
-
 Player InitPlayer()
 {
     Player player = {
@@ -95,9 +91,5 @@ void DrawPlayer(Texture2D spriteSheet, Player *player)
         DISPLAY_HEIGHT};
 
     DrawTexturePro(spriteSheet, player->frameRec, destRec, (Vector2){0, 0}, 0, WHITE);
-
-    // Affichage de la hitbox réelle en rouge
-    float hitboxX = player->position.x + (PLAYER_WIDTH - PLAYER_HITBOX_WIDTH) / 2;
-    float hitboxY = player->position.y + (PLAYER_HEIGHT - PLAYER_HITBOX_HEIGHT);
-    DrawRectangleLines(hitboxX, hitboxY, PLAYER_HITBOX_WIDTH, PLAYER_HITBOX_HEIGHT, RED);
+    // DrawRectangle(player->position.x, player->position.y, PLAYER_WIDTH, PLAYER_HEIGHT, RED);
 }

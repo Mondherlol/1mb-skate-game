@@ -29,7 +29,7 @@ typedef struct
 #define MAX_SPAWNERS 5
 
 void InitSpawner(ObstacleSpawner *spawner, ObstacleType type, float interval, float minDist);
-void TrySpawnObstacle(ObstacleSpawner *spawner, Obstacle *obstacles, int *obstacleCount, float delta);
+void TrySpawnObstacle(ObstacleSpawner *spawner, Obstacle *obstacles, int *obstacleCount, float delta, int playerPositionX);
 void UpdateObstacles(Obstacle *obstacles, int obstacleCount, float delta);
 void DrawObstacles(Obstacle *obstacles, int obstacleCount);
 

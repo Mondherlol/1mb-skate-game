@@ -12,7 +12,8 @@ typedef struct
     Rectangle frameRec;
     int currentFrame;
     int frameCounter;
-    Vector2 offset; // Offset pour centrer le sprite
+    Vector2 offset;   // Offset pour centrer le sprite
+    int collectibles; // Nombre de collectibles ramassés
 
 } Player;
 
