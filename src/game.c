@@ -61,10 +61,23 @@ void CheckCollision(Player *player, Obstacle *obstacles, int obstacleCount)
         if (!obstacles[i].active)
             continue;
 
-        if (hitboxX < obstacles[i].position.x + 30 &&
-            hitboxX + PLAYER_HITBOX_WIDTH > obstacles[i].position.x &&
-            hitboxY < obstacles[i].position.y + 30 &&
-            hitboxY + PLAYER_HITBOX_HEIGHT > obstacles[i].position.y)
+        float hitboxReductionX = 0;
+        float hitboxReductionY = 0;
+        if (obstacles[i].type == OBSTACLE_TYPE_SIDE)
+        {
+            hitboxReductionX = 25;
+            hitboxReductionY = 100;
+        }
+
+        // DESSINER HITBOX DE L'OBSTACLE
+        DrawRectangleLines(obstacles[i].position.x + (hitboxReductionX / 2), obstacles[i].position.y + (hitboxReductionY / 2),
+                           obstacles[i].width * obstacles[i].scale - hitboxReductionX,
+                           obstacles[i].height * obstacles[i].scale - hitboxReductionY, RED);
+
+        if (hitboxX < (obstacles[i].position.x + hitboxReductionX / 2) + ((obstacles[i].width * obstacles[i].scale) - hitboxReductionX) &&
+            hitboxX + PLAYER_HITBOX_WIDTH > obstacles[i].position.x + hitboxReductionX / 2 &&
+            hitboxY < (obstacles[i].position.y + hitboxReductionY / 2) + ((obstacles[i].height * obstacles[i].scale) - hitboxReductionY) &&
+            hitboxY + PLAYER_HITBOX_HEIGHT > obstacles[i].position.y + hitboxReductionY / 2)
         {
             player->position.x = 200;
             obstacles[i].active = false;
@@ -95,7 +108,7 @@ void CheckCollectibleCollision(Player *player, int maxCollectibles)
     }
 }
 
-void DrawGame(Texture2D spriteSheet, Player *player, Obstacle *obstacles, int obstacleCount)
+void DrawGame(Player *player, Obstacle *obstacles, int obstacleCount)
 {
     // Route
     DrawRectangle(0, GROUND_Y, GetScreenWidth(), GROUND_HEIGHT, DARKGRAY);
@@ -118,7 +131,7 @@ void DrawGame(Texture2D spriteSheet, Player *player, Obstacle *obstacles, int ob
     // DrawTexturePro(groundTexture, source2, dest2, (Vector2){0, 0}, 0.0f, WHITE);
 
     DrawText("Skate et évite les obstacles !", 10, 10, 20, DARKGRAY);
-    DrawPlayer(spriteSheet, player);
+    DrawPlayer(player);
     DrawObstacles(obstacles, obstacleCount);
     DrawCollectibles(collectibles, MAX_COLLECTIBLES);
     // Affichage du score en haut à droite

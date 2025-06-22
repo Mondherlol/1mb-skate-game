@@ -12,8 +12,13 @@
 #define MAX_FRAMES 4
 #define JUMP_BUFFER_FRAMES 6
 
+// Variable pour la texture du sprite
+static Texture2D spriteSheet;
+
 Player InitPlayer()
 {
+    spriteSheet = LoadTexture("../assets/Conan_Sprite_Skate.png");
+
     Player player = {
         .position = {200, GROUND_Y - PLAYER_HEIGHT},
         .velocityY = 0,
@@ -78,7 +83,7 @@ void UpdatePlayer(Player *player)
     }
 }
 
-void DrawPlayer(Texture2D spriteSheet, Player *player)
+void DrawPlayer(Player *player)
 {
     Vector2 displayPos = {
         player->position.x - (DISPLAY_WIDTH - PLAYER_WIDTH) / 2 + player->offset.x,
@@ -92,4 +97,9 @@ void DrawPlayer(Texture2D spriteSheet, Player *player)
 
     DrawTexturePro(spriteSheet, player->frameRec, destRec, (Vector2){0, 0}, 0, WHITE);
     // DrawRectangle(player->position.x, player->position.y, PLAYER_WIDTH, PLAYER_HEIGHT, RED);
+}
+
+void UnloadPlayer()
+{
+    UnloadTexture(spriteSheet);
 }

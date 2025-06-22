@@ -17,7 +17,6 @@ int main()
     SetTargetFPS(60);
 
     // Charger les textures et initialiser le joueur
-    Texture2D spriteSheet = LoadTexture("../assets/Conan_Sprite_Skate.png");
     Player player = InitPlayer();
 
     // Initialisation des obstacles
@@ -52,11 +51,15 @@ int main()
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawGame(spriteSheet, &player, obstacles, obstacleCount);
+        DrawGame(&player, obstacles, obstacleCount);
         EndDrawing();
     }
 
-    UnloadTexture(spriteSheet);
+    UnloadPlayer(); // Retirer la texture du joueur
+    for (int i = 0; i < spawnerCount; i++)
+    {
+        unloadSpawner(&spawners[i]); // Retirer les textures des obstacles
+    }
     CloseWindow();
     return 0;
 }

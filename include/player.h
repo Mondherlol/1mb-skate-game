@@ -19,6 +19,7 @@ typedef struct
 
 Player InitPlayer();
 void UpdatePlayer(Player *player);
-void DrawPlayer(Texture2D spriteSheet, Player *player);
+void DrawPlayer(Player *player);
+void UnloadPlayer();
 
 #endif

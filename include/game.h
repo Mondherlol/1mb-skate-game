@@ -7,7 +7,7 @@
 #include "collectible.h"
 
 void CheckCollision(Player *player, Obstacle *obstacles, int obstacleCount);
-void DrawGame(Texture2D spriteSheet, Player *player, Obstacle *obstacles, int obstacleCount);
+void DrawGame(Player *player, Obstacle *obstacles, int obstacleCount);
 void UpdateGame(Player *player);
 void InitGame();
 void CheckCollectibleCollision(Player *player, int maxCollectibles);
